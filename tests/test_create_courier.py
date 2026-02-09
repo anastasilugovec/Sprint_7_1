@@ -1,9 +1,6 @@
-import data
 import pytest
 import allure
-from data import DataForCourier
-from data import generate_new_courier_personal_data
-from methods.create_courier_methods import CreateCourierMethods
+
 
 class TestCreateCourier:
     @allure.title('Создание курьера')

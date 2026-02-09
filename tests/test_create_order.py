@@ -1,8 +1,5 @@
 import pytest
-import data
 import allure
-
-from methods.create_order_methods import CreateOrderMethods
 
 
 class TestCreateOrder:
