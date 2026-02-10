@@ -1,6 +1,7 @@
 import pytest
 import allure
-
+import data
+from methods.create_order_methods import CreateOrderMethods
 
 class TestCreateOrder:
     @allure.title('Создание заказа.')
