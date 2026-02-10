@@ -1,1 +1,0 @@
-{"uuid": "e8e67263-35ba-4908-8cef-bc8b0d57aba9", "children": ["e26dccd4-a1e6-4eaf-ab59-fd5102be599f"], "befores": [{"name": "fresh_courier", "status": "passed", "steps": [{"name": "Зарегистрировать нового курьера", "status": "passed", "start": 1770651632668, "stop": 1770651632668}], "start": 1770651632004, "stop": 1770651632673}], "start": 1770651632004, "stop": 1770651633257}
