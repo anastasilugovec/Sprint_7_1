@@ -1,26 +1,12 @@
 import requests
-import random
-import string
-import pytest
 import allure
-
-
+from helpers import generate_random_string
+from conftest import fresh_courier
+from conftest import register_new_courier
 BASE_URL = "https://qa-scooter.praktikum-services.ru/api/v1"
-# Расширяем список ошибок, включая 404
 ERROR_STATUS_CODES = (400, 422, 504, 404)
 
-def generate_random_string(length: int = 10) -> str:
-    letters = string.ascii_lowercase
-    return ''.join(random.choice(letters) for _ in range(length))
-
-def register_new_courier(login: str, password: str, first_name: str) -> requests.Response:
-    payload = {
-        "login": login,
-        "password": password,
-        "firstName": first_name
-    }
-    return requests.post(f"{BASE_URL}/courier", json=payload)
-
+@allure.step("Выполнить вход курьера с логином: {login}")
 def login_courier(login: str, password: str) -> requests.Response:
     payload = {
         "login": login,
@@ -30,20 +16,12 @@ def login_courier(login: str, password: str) -> requests.Response:
 
 @allure.feature("Аутентификация курьера")
 class TestCourierAuthAllure:
-    @pytest.fixture
-    def fresh_courier(self):
-        login = generate_random_string(10)
-        password = generate_random_string(12)
-        first_name = generate_random_string(8)
-        resp = register_new_courier(login, password, first_name)
-        with allure.step("Зарегистрировать нового курьера"):
-            assert resp.status_code == 201, f"Регистрация не удалась, статус: {resp.status_code}"
-        return login, password, first_name
+
 
     @allure.story("Успешная регистрация и вход")
     @allure.severity(allure.severity_level.BLOCKER)
     def test_successful_registration_and_login(self, fresh_courier):
-        login, password, _ = fresh_courier
+        login, password, first_name, resp = fresh_courier
         with allure.step("Выполнить вход с зарегистрированными данными"):
             resp = login_courier(login, password)
             assert resp.status_code == 200, f"Вход не удался, статус: {resp.status_code}"

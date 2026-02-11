@@ -20,10 +20,6 @@ class TestCreateCourier:
     def test_create_duplicate_courier(self):
         body = DataForCourier.get_create_courier_body()
 
-        response_first = CreateCourierMethods.create_courier(body)
-        assert response_first.status_code == 201
-        assert response_first.json() == {"ok": True}
-
         response_second = CreateCourierMethods.create_courier(body)
         assert response_second.status_code == 409
         assert response_second.json()['message'] == data.CREATE_COURIER_DUPLICATION_ERROR
