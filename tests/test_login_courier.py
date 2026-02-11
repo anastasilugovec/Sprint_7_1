@@ -2,7 +2,7 @@ import requests
 import allure
 from helpers import generate_random_string
 from conftest import fresh_courier
-from conftest import register_new_courier
+from conftest import register_new_courier, login_courier, delete_courier
 BASE_URL = "https://qa-scooter.praktikum-services.ru/api/v1"
 ERROR_STATUS_CODES = (400, 422, 504, 404)
 
